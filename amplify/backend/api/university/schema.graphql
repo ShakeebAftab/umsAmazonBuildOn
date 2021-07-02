@@ -1,0 +1,59 @@
+input CreateStudentInput {
+  rollNum: Int
+  name: String!
+}
+
+type Student {
+  rollNum: Int!
+  name: String!
+}
+
+input UpdateStudentInput {
+  rollNum: Int!
+  name: String
+}
+
+input CreateSubjectInput {
+  subCode: Int!
+  name: String!
+  rollNum: Int!
+}
+
+type Subject {
+  subCode: Int!
+  name: String!
+  rollNum: Int!
+}
+
+input UpdateSubjectInput {
+  subCode: Int!
+  name: String
+  rollNum: Int
+}
+
+type Mutation {
+  deleteStudent(rollNum: Int!): Student
+  createStudent(createStudentInput: CreateStudentInput!): Student
+  updateStudent(updateStudentInput: UpdateStudentInput!): Student
+  deleteSubject(subCode: Int!): Subject
+  createSubject(createSubjectInput: CreateSubjectInput!): Subject
+  updateSubject(updateSubjectInput: UpdateSubjectInput!): Subject
+}
+
+type Query {
+  getStudent(rollNum: Int!): Student
+  listStudents: [Student]
+  getSubject(subCode: Int!): Subject
+  listSubjects: [Subject]
+}
+
+type Subscription {
+  onCreateStudent: Student @aws_subscribe(mutations: ["createStudent"])
+  onCreateSubject: Subject @aws_subscribe(mutations: ["createSubject"])
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

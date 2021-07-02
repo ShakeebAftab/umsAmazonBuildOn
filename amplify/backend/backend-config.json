@@ -1,0 +1,28 @@
+{
+    "auth": {
+        "university9134256f": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false
+        }
+    },
+    "api": {
+        "university": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "userPoolConfig": {
+                            "userPoolId": "authuniversity9134256f"
+                        }
+                    },
+                    "additionalAuthenticationProviders": []
+                }
+            },
+            "rdsInit": true
+        }
+    }
+}

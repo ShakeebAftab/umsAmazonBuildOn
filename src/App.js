@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useContext } from 'react';
+import { Auth } from 'aws-amplify';
 
-function App() {
+// Screen Imports
+import MainApp from './Screens/MainApp';
+
+// Context
+import { AuthStateContext } from './State/AuthState';
+import SignInScreen from './Screens/SignInScreen';
+
+const App = () => {
+  const [,, signedIn, setSignedIn] = useContext(AuthStateContext);
+
+  useEffect(() => {
+    const checkSignedIn = async () => {
+      try {
+        await Auth.currentAuthenticatedUser();
+        setSignedIn(true);
+      } catch (error) {
+        setSignedIn(false);
+      }
+    }
+    checkSignedIn();
+  }, [setSignedIn])
+
+  if (!signedIn) {
+    return <SignInScreen />
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainApp />
   );
 }
 
 export default App;
+

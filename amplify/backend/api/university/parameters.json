@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "university",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authuniversity9134256f",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
