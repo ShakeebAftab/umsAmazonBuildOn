@@ -22,7 +22,7 @@ const AutoSelectionWrapper = ({ name, options, label, otherProps }) => {
         {...field}
         {...configSelect}
         {...otherProps}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => option.name}
         onChange = {(event, value) => setFieldValue(name, value)}
         renderInput={(params) => <TextField {...params} color='secondary' label={label} variant="outlined" />}
     />

@@ -1,55 +1,136 @@
-input CreateStudentInput {
+input CreateAttendanceInput {
+  SR: Int
+  day: String!
+  subjectCode: Int!
+  studentRoll: Int!
+  attendance: Int!
+}
+
+type Attendance {
+  SR: Int
+  day: String!
+  subjectCode: Int!
+  studentRoll: Int!
+  attendance: Int!
+}
+
+input UpdateAttendanceInput {
+  SR: Int
+  day: String
+  subjectCode: Int
+  studentRoll: Int
+  attendance: Int
+}
+
+input CreateMarksInput {
+  SR: Int
+  type: String
+  subjectCode: Int!
+  studentRoll: Int!
+}
+
+type Marks {
+  SR: Int
+  type: String
+  subjectCode: Int!
+  studentRoll: Int!
+}
+
+input UpdateMarksInput {
+  SR: Int
+  type: String
+  subjectCode: Int
+  studentRoll: Int
+}
+
+input CreateSelectedSubjectInput {
+  SR: Int
+  studentRoll: Int!
+  subjectCode: Int!
+}
+
+type SelectedSubject {
+  SR: Int
+  studentRoll: Int!
+  subjectCode: Int!
+}
+
+input UpdateSelectedSubjectInput {
+  SR: Int
+  studentRoll: Int
+  subjectCode: Int
+}
+
+input CreateStudentsInput {
   rollNum: Int
   name: String!
+  email: String
 }
 
-type Student {
-  rollNum: Int!
-  name: String!
-}
-
-input UpdateStudentInput {
-  rollNum: Int!
-  name: String
-}
-
-input CreateSubjectInput {
-  subCode: Int!
-  name: String!
-  rollNum: Int!
-}
-
-type Subject {
-  subCode: Int!
-  name: String!
-  rollNum: Int!
-}
-
-input UpdateSubjectInput {
-  subCode: Int!
-  name: String
+type Students {
   rollNum: Int
+  name: String!
+  email: String
+}
+
+input UpdateStudentsInput {
+  rollNum: Int
+  name: String
+  email: String
+}
+
+input CreateSubjectsInput {
+  code: Int
+  name: String!
+}
+
+type Subjects {
+  code: Int
+  name: String!
+}
+
+input UpdateSubjectsInput {
+  code: Int
+  name: String
 }
 
 type Mutation {
-  deleteStudent(rollNum: Int!): Student
-  createStudent(createStudentInput: CreateStudentInput!): Student
-  updateStudent(updateStudentInput: UpdateStudentInput!): Student
-  deleteSubject(subCode: Int!): Subject
-  createSubject(createSubjectInput: CreateSubjectInput!): Subject
-  updateSubject(updateSubjectInput: UpdateSubjectInput!): Subject
+  deleteAttendance(SR: Int!): Attendance
+  createAttendance(createAttendanceInput: CreateAttendanceInput!): Attendance
+  updateAttendance(updateAttendanceInput: UpdateAttendanceInput!): Attendance
+  deleteMarks(SR: Int!): Marks
+  createMarks(createMarksInput: CreateMarksInput!): Marks
+  updateMarks(updateMarksInput: UpdateMarksInput!): Marks
+  deleteSelectedSubject(SR: Int!): SelectedSubject
+  createSelectedSubject(createSelectedSubjectInput: CreateSelectedSubjectInput!): SelectedSubject
+  updateSelectedSubject(updateSelectedSubjectInput: UpdateSelectedSubjectInput!): SelectedSubject
+  deleteStudents(rollNum: Int!): Students
+  createStudents(createStudentsInput: CreateStudentsInput!): Students
+  updateStudents(updateStudentsInput: UpdateStudentsInput!): Students
+  deleteSubjects(code: Int!): Subjects
+  createSubjects(createSubjectsInput: CreateSubjectsInput!): Subjects
+  updateSubjects(updateSubjectsInput: UpdateSubjectsInput!): Subjects
 }
 
 type Query {
-  getStudent(rollNum: Int!): Student
-  listStudents: [Student]
-  getSubject(subCode: Int!): Subject
-  listSubjects: [Subject]
+  getAttendance(SR: Int!): Attendance
+  listAttendances: [Attendance]
+  getMarks(SR: Int!): Marks
+  listMarkss: [Marks]
+  getSelectedSubject(SR: Int!): SelectedSubject
+  listSelectedSubjects: [SelectedSubject]
+  getStudents(rollNum: Int!): Students
+  listStudentss: [Students]
+  getSubjects(code: Int!): Subjects
+  listSubjectss: [Subjects]
 }
 
 type Subscription {
-  onCreateStudent: Student @aws_subscribe(mutations: ["createStudent"])
-  onCreateSubject: Subject @aws_subscribe(mutations: ["createSubject"])
+  onCreateAttendance: Attendance @aws_subscribe(mutations: ["createAttendance"])
+  onCreateMarks: Marks @aws_subscribe(mutations: ["createMarks"])
+  onCreateSelectedSubject: SelectedSubject @aws_subscribe(mutations: ["createSelectedSubject"])
+  onCreateStudents: Students @aws_subscribe(mutations: ["createStudents"])
+  onCreateSubjects: Subjects @aws_subscribe(mutations: ["createSubjects"])
 }
 
 schema {

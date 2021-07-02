@@ -100,3 +100,20 @@ export const Subjects = [
     {title:'Theory of Automata', code: 99},
     {title:'Urdu', code: '100'}
 ]
+
+export const roles = {
+    admin: `Admin`,
+    teacher: `Teacher`,
+    student: `Student`
+}
+
+export const AttendanceOpts = {
+    0: 'Absent',
+    1: 'Present'
+}
+
+export const ExamType = {
+    finalExam: 'Final Exam',
+    midTerm: 'Mid Term',
+    quiz: 'Quiz', 
+}

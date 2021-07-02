@@ -1,20 +1,50 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateStudent = /* GraphQL */ `
-  subscription OnCreateStudent {
-    onCreateStudent {
-      rollNum
-      name
+export const onCreateAttendance = /* GraphQL */ `
+  subscription OnCreateAttendance {
+    onCreateAttendance {
+      SR
+      day
+      subjectCode
+      studentRoll
+      attendance
     }
   }
 `;
-export const onCreateSubject = /* GraphQL */ `
-  subscription OnCreateSubject {
-    onCreateSubject {
-      subCode
-      name
+export const onCreateMarks = /* GraphQL */ `
+  subscription OnCreateMarks {
+    onCreateMarks {
+      SR
+      type
+      subjectCode
+      studentRoll
+    }
+  }
+`;
+export const onCreateSelectedSubject = /* GraphQL */ `
+  subscription OnCreateSelectedSubject {
+    onCreateSelectedSubject {
+      SR
+      studentRoll
+      subjectCode
+    }
+  }
+`;
+export const onCreateStudents = /* GraphQL */ `
+  subscription OnCreateStudents {
+    onCreateStudents {
       rollNum
+      name
+      email
+    }
+  }
+`;
+export const onCreateSubjects = /* GraphQL */ `
+  subscription OnCreateSubjects {
+    onCreateSubjects {
+      code
+      name
     }
   }
 `;

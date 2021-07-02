@@ -65,7 +65,7 @@ const ConfirmForm = () => {
                         <TextFieldWrapper name='code' label='Code'/>
                     </Grid>
                     <Grid item xs={12}>
-                        <ButtonWrapper loading={loading} name='Confirm Email' />
+                        <ButtonWrapper loading={loading} name='Confirm User' />
                     </Grid>
                 </Grid>
                 <SnackBarWrapper open={open} setOpen={setOpen} msg={msg.msg} color={msg.color} />

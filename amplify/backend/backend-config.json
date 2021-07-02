@@ -1,6 +1,6 @@
 {
     "auth": {
-        "university9134256f": {
+        "university039b3f67": {
             "service": "Cognito",
             "providerPlugin": "awscloudformation",
             "dependsOn": [],
@@ -16,7 +16,7 @@
                     "defaultAuthentication": {
                         "authenticationType": "AMAZON_COGNITO_USER_POOLS",
                         "userPoolConfig": {
-                            "userPoolId": "authuniversity9134256f"
+                            "userPoolId": "authuniversity039b3f67"
                         }
                     },
                     "additionalAuthenticationProviders": []

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { Formik, Form } from 'formik';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
@@ -12,10 +12,13 @@ import AutoSelectionWrapper from '../Form/AutoSelectionWrapper';
 import SnackBarWrapper from '../SnackBarWrapper/SnackBarWrapper';
 
 // Import Mutations
-import { createStudent, createSubject, deleteStudent, deleteSubject } from '../../graphql/mutations';
+import { createStudents, createSelectedSubject, deleteStudents } from '../../graphql/mutations';
+
+// Queries Import
+import { listSubjectss } from '../../graphql/queries';
 
 // Dummy Data
-import { Subjects } from '../../data/Subjects'
+import { roles } from '../../data/Data'
 
 const SignUpForm = () => {
 
@@ -23,6 +26,7 @@ const SignUpForm = () => {
     const [open, setOpen] = useState(false);
     const [msg, setMsg] = useState({});
     const [isStudent, setIsStudent] = useState(false);
+    const [subjects, setSubjects] = useState([]);
     
     const initialState = {
         userName: '',
@@ -41,12 +45,6 @@ const SignUpForm = () => {
         role: Yup.string().required(`Required`),
         subject: Yup.object().notRequired().nullable()
     })
-    
-    const roles = {
-        admin: `Admin`,
-        teacher: `Teacher`,
-        student: `Student`
-    }
 
     const signUpUser = async (userName, email, password, role, code) => {
         try {
@@ -72,17 +70,16 @@ const SignUpForm = () => {
                 color: `error`
             })
             if (role === 'student') {
-                await API.graphql(graphqlOperation(deleteSubject, {deleteStudent: { subCode: code }}));
-                await API.graphql(graphqlOperation(deleteStudent, { deleteStudent: { rollNum: userName } }))
+                await API.graphql(graphqlOperation(deleteStudents, { deleteStudent: { rollNum: userName } }))
             }
         }
     }
 
-    const SignUpStudent = async (userName, email, password, role, { title, code }) => {
+    const SignUpStudent = async (userName, email, password, role, { code, name }) => {
         try {
-            const res = await API.graphql(graphqlOperation(createStudent, { createStudentInput: { name: userName }}));
-            await API.graphql(graphqlOperation(createSubject, { createSubjectInput: { name: title, subCode: code, rollNum: res.data.createStudent.rollNum }}));
-            signUpUser((res.data.createStudent.rollNum).toString(), email, password, role, code);
+            const res = await API.graphql(graphqlOperation(createStudents, { createStudentsInput: { name: userName, email: email }}));
+            await API.graphql(graphqlOperation(createSelectedSubject, { createSelectedSubjectInput: { studentRoll: res.data.createStudents.rollNum, subjectCode: code }}));
+            signUpUser((res.data.createStudents.rollNum).toString(), email, password, role, code);
         } catch (error) {
             setLoading(false);
             setOpen(true);
@@ -98,6 +95,14 @@ const SignUpForm = () => {
         setLoading(true)
         role === `student` ? SignUpStudent(userName, email, password, role, subject) : signUpUser(userName, email, password, role);
     }
+
+    useEffect(() => {
+        const fetchSubjects = async () => {
+            const res = await API.graphql(graphqlOperation(listSubjectss));
+            setSubjects(res.data.listSubjectss);
+        }
+        fetchSubjects();
+    }, [])
 
     return (
         <Formik
@@ -126,7 +131,7 @@ const SignUpForm = () => {
                     </Grid>
                     {isStudent && (
                         <Grid item xs={12}>
-                            <AutoSelectionWrapper name='subject' label='Subject' options={Subjects} />
+                            <AutoSelectionWrapper name='subject' label='Subject' options={subjects} />
                         </Grid>
                     )}
                     <Grid item xs={12}>
