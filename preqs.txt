@@ -1,8 +1,0 @@
-AwsAccountId: 228287724687
-CognitoUserPoolId:
-CognitoClientId:
-CognitoDomainUrl:
-RoleArn:
-DashboardRegion:
-APIGatewayUrl: 
-BucketName: univeristy-quicksight
