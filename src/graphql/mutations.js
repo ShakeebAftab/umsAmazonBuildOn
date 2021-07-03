@@ -41,6 +41,7 @@ export const deleteMarks = /* GraphQL */ `
       type
       subjectCode
       studentRoll
+      marks
     }
   }
 `;
@@ -51,6 +52,7 @@ export const createMarks = /* GraphQL */ `
       type
       subjectCode
       studentRoll
+      marks
     }
   }
 `;
@@ -61,6 +63,7 @@ export const updateMarks = /* GraphQL */ `
       type
       subjectCode
       studentRoll
+      marks
     }
   }
 `;

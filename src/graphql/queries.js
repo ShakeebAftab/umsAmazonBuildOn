@@ -30,6 +30,7 @@ export const getMarks = /* GraphQL */ `
       type
       subjectCode
       studentRoll
+      marks
     }
   }
 `;
@@ -40,6 +41,7 @@ export const listMarkss = /* GraphQL */ `
       type
       subjectCode
       studentRoll
+      marks
     }
   }
 `;

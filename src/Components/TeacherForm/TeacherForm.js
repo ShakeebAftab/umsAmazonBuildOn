@@ -13,15 +13,15 @@ import DateWrapper from '../Form/DateWrapper';
 import SnackBarWrapper from '../SnackBarWrapper/SnackBarWrapper'
 
 // Graphql Imports
-import  { getStudents } from '../../graphql/queries';
-import { createAttendance } from '../../graphql/mutations';
+import  { listStudentss, listSubjectss } from '../../graphql/queries';
+import { createAttendance, createMarks } from '../../graphql/mutations';
 
 // Data
-import { Subjects, AttendanceOpts, ExamType } from '../../data/Data';
+import { AttendanceOpts, ExamType } from '../../data/Data';
 
 const getRolls = (rolls) => {
     const array = [];
-    rolls.map(roll => array.push({title: roll.rollNum.toString()}))
+    rolls.map(roll => array.push({name: roll.rollNum.toString()}))
     return array;
 }
 
@@ -49,18 +49,23 @@ const TeacherForm = () => {
     const [open, setOpen] = useState(false);
     const [msg, setMsg] = useState({});
     const [rolls, setRolls] = useState([]);
+    const [subjects, setSubjects] = useState([]);
 
     const handleSubmit = async ({ rollNo, date, subject, attendance, type, marks }) => {
         setLoading(true);
         try {
-            const res = await API.graphql(graphqlOperation(createAttendance, { createAttendanceInput: {day: date, subCode: subject.code, rollNum: parseInt(rollNo.title), attendance: attendance} }))
+            const [resOne, resTwo] = await Promise.all( [ 
+                API.graphql(graphqlOperation(createAttendance, { createAttendanceInput: {day: date, subjectCode: subject.code, studentRoll: parseInt(rollNo.name), attendance: attendance} })), 
+                API.graphql(graphqlOperation(createMarks, { createMarksInput: { type: type, subjectCode: subject.code, studentRoll: parseInt(rollNo.name), marks: marks } })) 
+            ] )
             setOpen(true);
             setLoading(false);
             setMsg({
                 msg: `Record stored successfully`,
                 color: `success`
             })
-            console.log(res);
+            console.log(resOne);
+            console.log(resTwo);
         } catch (error) {
             console.log(error);
             setLoading(false);
@@ -74,8 +79,9 @@ const TeacherForm = () => {
 
     useEffect(() => {
         const fetchRolls = async () => {
-            const res = await API.graphql(graphqlOperation(getStudents));
-            setRolls(getRolls(res.data.getStudents));
+            const [resOne, resTwo] = await Promise.all([API.graphql(graphqlOperation(listStudentss)), API.graphql(graphqlOperation(listSubjectss))]);
+            setRolls(getRolls(resOne.data.listStudentss));
+            setSubjects(resTwo.data.listSubjectss);
         }   
         fetchRolls();
     }, [])
@@ -100,7 +106,7 @@ const TeacherForm = () => {
                         <DateWrapper name='date' label='Date' />
                     </Grid>
                     <Grid item xs={12}>
-                        <AutoSelectionWrapper name='subject' label='Subject' options={Subjects} />
+                        <AutoSelectionWrapper name='subject' label='Subject' options={subjects} />
                     </Grid>
                     <Grid item xs={12}>
                         <SelectionWrapper name='attendance' label='Attendance' options={AttendanceOpts} />

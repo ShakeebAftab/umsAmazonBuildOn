@@ -19,6 +19,7 @@ export const onCreateMarks = /* GraphQL */ `
       type
       subjectCode
       studentRoll
+      marks
     }
   }
 `;
