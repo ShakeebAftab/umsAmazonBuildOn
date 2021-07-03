@@ -2,7 +2,8 @@ import { Grid, Box, Container } from '@material-ui/core';
 
 // Custom Components
 import Header from '../Components/Header/Header';
-import TeacherForm from '../Components/TeacherForm/TeacherForm';
+import AttendanceForm from '../Components/TeacherForm/AttendanceForm';
+import MarksForm from '../Components/TeacherForm/MarksForm';
 
 const Teacher = () => {
     return (
@@ -11,10 +12,15 @@ const Teacher = () => {
                 <Grid item xs={12}>
                     <Header hidden={true} />
                 </Grid>
-                <Grid container item spacing={2}>
-                    <Grid item xs={12}>
+                <Grid container item spacing={2} style={{paddingBottom: '32px'}}>
+                    <Grid item md={6}>
                         <Container maxWidth="sm">
-                            <TeacherForm />
+                            <AttendanceForm />
+                        </Container>
+                    </Grid>
+                    <Grid item md={6}>
+                        <Container maxWidth="sm">
+                            <MarksForm />
                         </Container>
                     </Grid>
                 </Grid>

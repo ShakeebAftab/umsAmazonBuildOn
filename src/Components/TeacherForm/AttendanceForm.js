@@ -5,7 +5,6 @@ import { API, graphqlOperation } from 'aws-amplify';
 import * as Yup from 'yup';
 
 // Custom Components
-import TextFieldWrapper from '../Form/TextFieldWrapper'
 import ButtonWrapper from '../Form/ButtonWrapper';
 import SelectionWrapper from '../Form/SelectionWrapper';
 import AutoSelectionWrapper from '../Form/AutoSelectionWrapper';
@@ -14,10 +13,10 @@ import SnackBarWrapper from '../SnackBarWrapper/SnackBarWrapper'
 
 // Graphql Imports
 import  { listStudentss, listSubjectss } from '../../graphql/queries';
-import { createAttendance, createMarks } from '../../graphql/mutations';
+import { createAttendance } from '../../graphql/mutations';
 
 // Data
-import { AttendanceOpts, ExamType } from '../../data/Data';
+import { AttendanceOpts } from '../../data/Data';
 
 const getRolls = (rolls) => {
     const array = [];
@@ -26,14 +25,12 @@ const getRolls = (rolls) => {
 }
 
 
-const TeacherForm = () => {
+const AttendanceForm = () => {
 
     const initialState = {
         rollNo: '',
         date: '',
         attendance: '1',
-        type: 'quiz',
-        marks: ''
     }
     
     const formSchema = Yup.object().shape({
@@ -41,8 +38,6 @@ const TeacherForm = () => {
         date: Yup.date().required('Required'),
         subject: Yup.object().notRequired().nullable(),
         attendance: Yup.bool().required('Required'),
-        type: Yup.string().required('required'),
-        marks: Yup.number().required(`Required`).min(0, 'Marks must be between 0 to 100').max(100, 'Marks must be between 0 to 100'),
     })
 
     const [loading, setLoading] = useState(false);
@@ -51,21 +46,16 @@ const TeacherForm = () => {
     const [rolls, setRolls] = useState([]);
     const [subjects, setSubjects] = useState([]);
 
-    const handleSubmit = async ({ rollNo, date, subject, attendance, type, marks }) => {
+    const handleSubmit = async ({ rollNo, date, subject, attendance }) => {
         setLoading(true);
         try {
-            const [resOne, resTwo] = await Promise.all( [ 
-                API.graphql(graphqlOperation(createAttendance, { createAttendanceInput: {day: date, subjectCode: subject.code, studentRoll: parseInt(rollNo.name), attendance: attendance} })), 
-                API.graphql(graphqlOperation(createMarks, { createMarksInput: { type: type, subjectCode: subject.code, studentRoll: parseInt(rollNo.name), marks: marks } })) 
-            ] )
+            await API.graphql(graphqlOperation(createAttendance, { createAttendanceInput: {day: date, subjectCode: subject.code, studentRoll: parseInt(rollNo.name), attendance: attendance} })); 
             setOpen(true);
             setLoading(false);
             setMsg({
                 msg: `Record stored successfully`,
                 color: `success`
             })
-            console.log(resOne);
-            console.log(resTwo);
         } catch (error) {
             console.log(error);
             setLoading(false);
@@ -96,7 +86,7 @@ const TeacherForm = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography variant='h5' >
-                            Add Student Record
+                            Add Student Attendance
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
@@ -112,12 +102,6 @@ const TeacherForm = () => {
                         <SelectionWrapper name='attendance' label='Attendance' options={AttendanceOpts} />
                     </Grid>
                     <Grid item xs={12}>
-                        <SelectionWrapper name='type' label='Type' options={ExamType} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextFieldWrapper name='marks' label='Marks' />
-                    </Grid>
-                    <Grid item xs={12}>
                         <ButtonWrapper name='Add Record' loading={loading} />
                     </Grid>
                 </Grid>
@@ -127,4 +111,4 @@ const TeacherForm = () => {
     )
 }
 
-export default TeacherForm;
+export default AttendanceForm;
