@@ -53,8 +53,8 @@ class Embed extends React.Component {
                 country: "United States"
             },
             scrolling: "no",
-            // height: "800px",
-            // width: "912px",
+            height: "1080px",
+            width: "1920px",
             footerPaddingEnabled: true,
         };
         const dashboard = QuickSightEmbedding.embedDashboard(options);

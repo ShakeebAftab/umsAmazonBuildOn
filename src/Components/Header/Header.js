@@ -37,7 +37,7 @@ const Header = ({ msg, hidden, isTeacher, buttonName, dashboard, setDashboard })
                 <Typography variant="h6" className={classes.title}>
                     {msg ? msg : `WELCOME`}
                 </Typography>
-                {isTeacher && <Button color="inherit" className={classes.button} size="medium" onClick={() => setDashboard(setDashboard(!dashboard))}>{buttonName}</Button>}
+                {isTeacher && <Button color="inherit" className={classes.button} size="medium" onClick={() => setDashboard(!dashboard)}>{buttonName.toUpperCase()}</Button>}
                 {hidden === true && <Button color="inherit" className={classes.button} size="medium" onClick={() => handleLogout()} >SIGN OUT</Button>}
             </Toolbar>
         </AppBar>
