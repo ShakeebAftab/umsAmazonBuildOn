@@ -46,7 +46,7 @@ const SignUpForm = () => {
         subject: Yup.object().notRequired().nullable()
     })
 
-    const signUpUser = async (userName, email, password, role, code, form) => {
+    const signUpUser = async (userName, email, password, role, code) => {
         try {
             await Auth.signUp({
                 username: userName,
@@ -62,7 +62,6 @@ const SignUpForm = () => {
                 msg: `User created successfully with Username: ${userName}`,
                 color: `success`
             });
-            form();
         } catch (error) {
             setLoading(false);
             setOpen(true);
@@ -76,11 +75,11 @@ const SignUpForm = () => {
         }
     }
 
-    const SignUpStudent = async (userName, email, password, role, { code, name }, form) => {
+    const SignUpStudent = async (userName, email, password, role, { code, name }) => {
         try {
             const res = await API.graphql(graphqlOperation(createStudents, { createStudentsInput: { name: userName, email: email }}));
             await API.graphql(graphqlOperation(createSelectedSubject, { createSelectedSubjectInput: { studentRoll: res.data.createStudents.rollNum, subjectCode: code }}));
-            signUpUser((userName).toString(), email, password, role, code, form);
+            signUpUser((res.data.createStudents.rollNum).toString(), email, password, role, code);
         } catch (error) {
             setLoading(false);
             setOpen(true);
@@ -92,9 +91,10 @@ const SignUpForm = () => {
         }
     }
 
-    const handleSubmit = async ({ userName, email, password, role, subject }, form) => {
+    const handleSubmit = async ({ userName, email, password, role, subject }, resetForm) => {
         setLoading(true)
-        role === `student` ? SignUpStudent(userName, email, password, role, subject, form) : signUpUser(userName, email, password, role, form);
+        role === `student` ? SignUpStudent(userName, email, password, role, subject) : signUpUser(userName, email, password, role);
+        resetForm();
     }
 
     useEffect(() => {
