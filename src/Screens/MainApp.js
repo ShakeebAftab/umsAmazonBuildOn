@@ -34,9 +34,10 @@ const MainApp = () => {
         </Box>
     )
 
-    if (authState === 'admin') return <Admin />
-    if (authState === 'teacher') return <Teacher />
-    return <Student userName={userName} />
+    // if (authState === 'admin') return <Admin />
+    // if (authState === 'teacher') return <Teacher />
+    // return <Student userName={userName} />
+    return <Admin />
 }
 
 export default MainApp;
