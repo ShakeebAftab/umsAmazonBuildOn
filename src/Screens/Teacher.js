@@ -11,7 +11,7 @@ const Teacher = () => {
 
     const [dashboard, setDashboard] = useState(false);
 
-    if (dashboard) return (
+    if (dashboard === true) return (
         <Box overflow='hidden'>
             <Grid container direction='column' spacing={4}>
                 <Grid item xs={12}>
