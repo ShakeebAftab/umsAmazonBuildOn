@@ -35,7 +35,7 @@ app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
         IdentityPoolId: 'us-east-1:5d3703fe-ae4e-4685-be0a-cdbb0ade9f70', // your identity pool id here
         Logins: {
             // your logins here
-            'cognito-idp.us-east-1.amazonaws.com/<user-pool-id>': req.query.jwtToken
+            'cognito-idp.us-east-1.amazonaws.com/us-east-1_5dkjsp8LF': req.query.jwtToken
         }
     };
     
