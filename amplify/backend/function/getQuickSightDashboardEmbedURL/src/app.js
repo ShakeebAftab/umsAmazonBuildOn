@@ -24,7 +24,7 @@ app.use(function(req, res, next) {
 
 app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
 
-    var roleArn = 'arn:aws:iam::228287724687:role/QuickSightDashBoardEmbed'; // your cognito authenticated role arn here
+    var roleArn = 'arn:aws:iam::228287724687:role/QSEmbed'; // your cognito authenticated role arn here
   
     AWS.config.region = 'us-east-1';
   
@@ -32,10 +32,10 @@ app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
     var cognitoIdentity = new AWS.CognitoIdentity();
     var stsClient = new AWS.STS();
     var params = {
-        IdentityPoolId: 'us-east-1:95ea863d-dca5-4fa5-9fef-aa759dfad2f4', // your identity pool id here
+        IdentityPoolId: 'us-east-1:5d3703fe-ae4e-4685-be0a-cdbb0ade9f70', // your identity pool id here
         Logins: {
             // your logins here
-            'cognito-idp.us-east-1.amazonaws.com/us-east-1_N35goXzOD': req.query.jwtToken
+            'cognito-idp.us-east-1.amazonaws.com/<user-pool-id>': req.query.jwtToken
         }
     };
     
@@ -44,7 +44,7 @@ app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
         else {
             data.Logins = {
                 // your logins here
-                'cognito-idp.us-east-1.amazonaws.com/us-east-1_N35goXzOD': req.query.jwtToken
+                'cognito-idp.us-east-1.amazonaws.com/<user-pool-id>': req.query.jwtToken
             };
 
             cognitoIdentity.getOpenIdToken(data, function(err, openIdToken) {
@@ -101,7 +101,7 @@ app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
                                             // required
                                             AwsAccountId: "228287724687",
                                             // required
-                                            DashboardId: "4765acf8-8383-4361-a444-81088e43712a",
+                                            DashboardId: "4765acf8-8383-4361-a444-81088e43712a", // Change This
                                             // required
                                             IdentityType: 'IAM',
                                             ResetDisabled: false, // can be passed in from api-gateway call
@@ -134,7 +134,7 @@ app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
                                           // required
                                           AwsAccountId: "228287724687",
                                           // required
-                                          DashboardId: "4765acf8-8383-4361-a444-81088e43712a",
+                                          DashboardId: "4765acf8-8383-4361-a444-81088e43712a", // Change This
                                           // required
                                           IdentityType: 'IAM',
                                           ResetDisabled: false, // can be passed in from api-gateway call
