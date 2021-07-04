@@ -39,13 +39,7 @@
       ]
     }
   },
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2021-07-03T23:50:11.881Z"
-    }
-  },
+  "hosting": {},
   "function": {
     "getQuickSightDashboardEmbedURL": {
       "build": true,
