@@ -44,7 +44,7 @@ app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
         else {
             data.Logins = {
                 // your logins here
-                'cognito-idp.us-east-1.amazonaws.com/<user-pool-id>': req.query.jwtToken
+                'cognito-idp.us-east-1.amazonaws.com/us-east-1_5dkjsp8LF': req.query.jwtToken
             };
 
             cognitoIdentity.getOpenIdToken(data, function(err, openIdToken) {

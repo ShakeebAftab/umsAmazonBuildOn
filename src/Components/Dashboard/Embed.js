@@ -66,7 +66,7 @@ class Embed extends React.Component {
         return (
             <div>
                 { this.state.loader && (
-                    <div className={classes.loading}> <CircularProgress /> </div>
+                    <div className={classes.loading}> <CircularProgress color='secondary' /> </div>
                 )}
                 <div id="dashboardContainer"></div>
             </div>
