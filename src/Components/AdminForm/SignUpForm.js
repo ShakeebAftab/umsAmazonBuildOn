@@ -77,8 +77,8 @@ const SignUpForm = () => {
 
     const SignUpStudent = async (userName, email, password, role, { code, name }) => {
         try {
-            // const res = await API.graphql(graphqlOperation(createStudents, { createStudentsInput: { name: userName, email: email }}));
-            // await API.graphql(graphqlOperation(createSelectedSubject, { createSelectedSubjectInput: { studentRoll: res.data.createStudents.rollNum, subjectCode: code }}));
+            const res = await API.graphql(graphqlOperation(createStudents, { createStudentsInput: { name: userName, email: email }}));
+            await API.graphql(graphqlOperation(createSelectedSubject, { createSelectedSubjectInput: { studentRoll: res.data.createStudents.rollNum, subjectCode: code }}));
             signUpUser((userName).toString(), email, password, role, code);
         } catch (error) {
             setLoading(false);
