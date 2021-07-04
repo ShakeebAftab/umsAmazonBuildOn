@@ -79,7 +79,7 @@ const SignUpForm = () => {
         try {
             // const res = await API.graphql(graphqlOperation(createStudents, { createStudentsInput: { name: userName, email: email }}));
             // await API.graphql(graphqlOperation(createSelectedSubject, { createSelectedSubjectInput: { studentRoll: res.data.createStudents.rollNum, subjectCode: code }}));
-            signUpUser((res.data.createStudents.rollNum).toString(), email, password, role, code);
+            signUpUser((userName).toString(), email, password, role, code);
         } catch (error) {
             setLoading(false);
             setOpen(true);
