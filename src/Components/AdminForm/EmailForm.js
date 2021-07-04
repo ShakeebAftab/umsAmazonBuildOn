@@ -22,15 +22,16 @@ const AdminForm = () => {
         confirmPassword: Yup.string().required('Required').min(8, 'Must be atleast 8 characters'),
     })
 
-    const handleSubmit = async ({ userName, email, password }) => {
+    const handleSubmit = async ({ userName, email, password }, form) => {
         console.log(`handleSubmit`);
+        form();
     }
 
     return (
         <Formik
             initialValues={{...initialState}}
             validationSchema={formSchema}
-            onSubmit={values => handleSubmit(values)}
+            onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
         >
             <Form>
                 <Grid container spacing={2}>

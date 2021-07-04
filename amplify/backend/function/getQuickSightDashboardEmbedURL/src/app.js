@@ -101,7 +101,7 @@ app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
                                             // required
                                             AwsAccountId: "228287724687",
                                             // required
-                                            DashboardId: "4765acf8-8383-4361-a444-81088e43712a", // Change This
+                                            DashboardId: "88f8d827-882c-45e7-a5c6-bf3a3d4be84a", // Change This
                                             // required
                                             IdentityType: 'IAM',
                                             ResetDisabled: false, // can be passed in from api-gateway call
@@ -134,7 +134,7 @@ app.get('/getQuickSightDashboardEmbedURL', function(req, res) {
                                           // required
                                           AwsAccountId: "228287724687",
                                           // required
-                                          DashboardId: "4765acf8-8383-4361-a444-81088e43712a", // Change This
+                                          DashboardId: "88f8d827-882c-45e7-a5c6-bf3a3d4be84a", // Change This
                                           // required
                                           IdentityType: 'IAM',
                                           ResetDisabled: false, // can be passed in from api-gateway call

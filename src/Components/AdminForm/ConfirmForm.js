@@ -25,7 +25,7 @@ const ConfirmForm = () => {
     const [open, setOpen] = useState(false);
     const [msg, setMsg] = useState({});
 
-    const handleSubmit = async ({ userName, code }) => {
+    const handleSubmit = async ({ userName, code }, form) => {
         setLoading(true);
         try {
             await Auth.confirmSignUp(userName, code);
@@ -42,6 +42,7 @@ const ConfirmForm = () => {
                 color: 'error'
             });
             setLoading(false);
+            form();
         }
     }
 
@@ -49,7 +50,7 @@ const ConfirmForm = () => {
         <Formik
             initialValues={{...initialState}}
             validationSchema={formSchema}
-            onSubmit={values => handleSubmit(values)}
+            onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
         >
             <Form>
                 <Grid container spacing={2}>

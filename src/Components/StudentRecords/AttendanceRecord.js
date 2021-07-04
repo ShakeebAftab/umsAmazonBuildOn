@@ -7,6 +7,13 @@ const AttendanceRecord = ({ records }) => {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
+            <TableCell align='center'></TableCell>
+            <TableCell align='center'>Attendance</TableCell>
+            <TableCell align='center'></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableHead>
+          <TableRow>
             <TableCell>Date</TableCell>
             <TableCell align="right">Subject Code</TableCell>
             <TableCell align="right">Attendance</TableCell>

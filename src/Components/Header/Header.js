@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Header = ({ msg, hidden }) => {
+const Header = ({ msg, hidden, isTeacher, buttonName, dashboard, setDashboard }) => {
   const classes = useStyles();
 
   const [, setAuthState,, setSignedIn] = useContext(AuthStateContext)
@@ -37,6 +37,7 @@ const Header = ({ msg, hidden }) => {
                 <Typography variant="h6" className={classes.title}>
                     {msg ? msg : `WELCOME`}
                 </Typography>
+                {isTeacher && <Button color="inherit" className={classes.button} size="medium" onClick={() => setDashboard(setDashboard(!dashboard))}>{buttonName}</Button>}
                 {hidden === true && <Button color="inherit" className={classes.button} size="medium" onClick={() => handleLogout()} >SIGN OUT</Button>}
             </Toolbar>
         </AppBar>

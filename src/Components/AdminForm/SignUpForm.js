@@ -46,7 +46,7 @@ const SignUpForm = () => {
         subject: Yup.object().notRequired().nullable()
     })
 
-    const signUpUser = async (userName, email, password, role, code) => {
+    const signUpUser = async (userName, email, password, role, code, form) => {
         try {
             await Auth.signUp({
                 username: userName,
@@ -61,7 +61,8 @@ const SignUpForm = () => {
             setMsg({
                 msg: `User created successfully with Username: ${userName}`,
                 color: `success`
-            })
+            });
+            form();
         } catch (error) {
             setLoading(false);
             setOpen(true);
@@ -75,11 +76,11 @@ const SignUpForm = () => {
         }
     }
 
-    const SignUpStudent = async (userName, email, password, role, { code, name }) => {
+    const SignUpStudent = async (userName, email, password, role, { code, name }, form) => {
         try {
             const res = await API.graphql(graphqlOperation(createStudents, { createStudentsInput: { name: userName, email: email }}));
             await API.graphql(graphqlOperation(createSelectedSubject, { createSelectedSubjectInput: { studentRoll: res.data.createStudents.rollNum, subjectCode: code }}));
-            signUpUser((userName).toString(), email, password, role, code);
+            signUpUser((userName).toString(), email, password, role, code, form);
         } catch (error) {
             setLoading(false);
             setOpen(true);
@@ -91,9 +92,9 @@ const SignUpForm = () => {
         }
     }
 
-    const handleSubmit = async ({ userName, email, password, role, subject }) => {
+    const handleSubmit = async ({ userName, email, password, role, subject }, form) => {
         setLoading(true)
-        role === `student` ? SignUpStudent(userName, email, password, role, subject) : signUpUser(userName, email, password, role);
+        role === `student` ? SignUpStudent(userName, email, password, role, subject, form) : signUpUser(userName, email, password, role, form);
     }
 
     useEffect(() => {
@@ -108,7 +109,7 @@ const SignUpForm = () => {
         <Formik
             initialValues={{...initialState}}
             validationSchema={formSchema}
-            onSubmit={values => handleSubmit(values)}
+            onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
         >
             <Form>
                 <Grid container spacing={2}>
