@@ -54,7 +54,7 @@ class Embed extends React.Component {
             },
             scrolling: "no",
             height: "1080px",
-            width: "1920px",
+            width: "1080px",
             footerPaddingEnabled: true,
         };
         const dashboard = QuickSightEmbedding.embedDashboard(options);
