@@ -12,16 +12,15 @@ const App = () => {
   const [,, signedIn, setSignedIn] = useContext(AuthStateContext);
 
   useEffect(() => {
-    // const checkSignedIn = async () => {
-    //   try {
-    //     await Auth.currentAuthenticatedUser();
-    //     setSignedIn(true);
-    //   } catch (error) {
-    //     setSignedIn(false);
-    //   }
-    // }
-    // checkSignedIn();
-    setSignedIn(true);
+    const checkSignedIn = async () => {
+      try {
+        await Auth.currentAuthenticatedUser();
+        setSignedIn(true);
+      } catch (error) {
+        setSignedIn(false);
+      }
+    }
+    checkSignedIn();
   }, [setSignedIn])
 
   if (!signedIn) {

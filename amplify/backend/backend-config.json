@@ -1,50 +1,50 @@
 {
-  "auth": {
-    "university039b3f67": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  },
-  "api": {
-    "university": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authuniversity039b3f67"
-            }
-          },
-          "additionalAuthenticationProviders": []
+    "auth": {
+        "university039b3f67": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false
         }
-      },
-      "rdsInit": true
     },
-    "getQuickSightDashboardEmbedURL": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "getQuickSightDashboardEmbedURL",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
+    "api": {
+        "getQuickSightDashboardEmbedURL": {
+            "service": "API Gateway",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [
+                {
+                    "category": "function",
+                    "resourceName": "getQuickSightDashboardEmbedURL",
+                    "attributes": [
+                        "Name",
+                        "Arn"
+                    ]
+                }
+            ]
+        },
+        "university": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "userPoolConfig": {
+                            "userPoolId": "authuniversity039b3f67"
+                        }
+                    },
+                    "additionalAuthenticationProviders": []
+                }
+            },
+            "rdsInit": true
         }
-      ]
+    },
+    "hosting": {},
+    "function": {
+        "getQuickSightDashboardEmbedURL": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        }
     }
-  },
-  "hosting": {},
-  "function": {
-    "getQuickSightDashboardEmbedURL": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  }
 }

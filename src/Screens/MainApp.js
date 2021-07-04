@@ -24,7 +24,7 @@ const MainApp = () => {
         fetchUserType();
     }, [setAuthState])
 
-    if (userName === 'admin') return (
+    if (userName === '') return (
         <Box overflow='hidden'>
             <Grid container direction='column' spacing={4}>
                 <Grid item sm={12}>
@@ -34,10 +34,9 @@ const MainApp = () => {
         </Box>
     )
 
-    // if (authState === 'admin') return <Admin />
-    // if (authState === 'teacher') return <Teacher />
-    // return <Student userName={userName} />
-    return <Admin />
+    if (authState === 'admin') return <Admin />
+    if (authState === 'teacher') return <Teacher />
+    return <Student userName={userName} />
 }
 
 export default MainApp;

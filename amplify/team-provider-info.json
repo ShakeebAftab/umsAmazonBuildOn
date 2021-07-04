@@ -1,63 +1,63 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-university-dev-14810-authRole",
-      "UnauthRoleArn": "arn:aws:iam::228287724687:role/amplify-university-dev-14810-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::228287724687:role/amplify-university-dev-14810-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-university-dev-14810-deployment",
-      "UnauthRoleName": "amplify-university-dev-14810-unauthRole",
-      "StackName": "amplify-university-dev-14810",
-      "StackId": "arn:aws:cloudformation:us-east-1:228287724687:stack/amplify-university-dev-14810/d8f104b0-db76-11eb-b1b1-0e22fadd816f",
-      "AmplifyAppId": "d1nl7047j8w93j"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-university-dev-14810-authRole",
+            "UnauthRoleArn": "arn:aws:iam::228287724687:role/amplify-university-dev-14810-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::228287724687:role/amplify-university-dev-14810-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-university-dev-14810-deployment",
+            "UnauthRoleName": "amplify-university-dev-14810-unauthRole",
+            "StackName": "amplify-university-dev-14810",
+            "StackId": "arn:aws:cloudformation:us-east-1:228287724687:stack/amplify-university-dev-14810/d8f104b0-db76-11eb-b1b1-0e22fadd816f",
+            "AmplifyAppId": "d1nl7047j8w93j"
+        },
+        "categories": {
+            "auth": {
+                "university039b3f67": {}
+            },
+            "function": {
+                "getQuickSightDashboardEmbedURL": {
+                    "deploymentBucketName": "amplify-university-dev-14810-deployment",
+                    "s3Key": "amplify-builds/getQuickSightDashboardEmbedURL-394937623155534b2f36-build.zip"
+                }
+            },
+            "api": {
+                "university": {
+                    "rdsRegion": "us-east-1",
+                    "rdsClusterIdentifier": "arn:aws:rds:us-east-1:228287724687:cluster:ums",
+                    "rdsSecretStoreArn": "arn:aws:secretsmanager:us-east-1:228287724687:secret:rds-db-credentials/cluster-QCY5GO6WOMYBPUDFNLE4D4TAG4/admin-9aXoVF",
+                    "rdsDatabaseName": "umsdb"
+                }
+            }
+        }
     },
-    "categories": {
-      "auth": {
-        "university039b3f67": {}
-      },
-      "api": {
-        "university": {
-          "rdsRegion": "us-east-1",
-          "rdsClusterIdentifier": "arn:aws:rds:us-east-1:228287724687:cluster:ums",
-          "rdsSecretStoreArn": "arn:aws:secretsmanager:us-east-1:228287724687:secret:rds-db-credentials/cluster-QCY5GO6WOMYBPUDFNLE4D4TAG4/admin-9aXoVF",
-          "rdsDatabaseName": "umsdb"
+    "hosted": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-university-hosted-130600-authRole",
+            "UnauthRoleArn": "arn:aws:iam::228287724687:role/amplify-university-hosted-130600-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::228287724687:role/amplify-university-hosted-130600-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-university-hosted-130600-deployment",
+            "UnauthRoleName": "amplify-university-hosted-130600-unauthRole",
+            "StackName": "amplify-university-hosted-130600",
+            "StackId": "arn:aws:cloudformation:us-east-1:228287724687:stack/amplify-university-hosted-130600/b08064c0-dc9e-11eb-b6b8-0e2e9aec3a21",
+            "AmplifyAppId": "d1nl7047j8w93j"
+        },
+        "categories": {
+            "api": {
+                "university": {
+                    "rdsRegion": "us-east-1",
+                    "rdsClusterIdentifier": "arn:aws:rds:us-east-1:228287724687:cluster:ums",
+                    "rdsSecretStoreArn": "arn:aws:secretsmanager:us-east-1:228287724687:secret:rds-db-credentials/cluster-QCY5GO6WOMYBPUDFNLE4D4TAG4/admin-9aXoVF",
+                    "rdsDatabaseName": "umsdb"
+                }
+            },
+            "auth": {
+                "university039b3f67": {}
+            },
+            "function": {
+                "getQuickSightDashboardEmbedURL": {}
+            }
         }
-      },
-      "function": {
-        "getQuickSightDashboardEmbedURL": {
-          "deploymentBucketName": "amplify-university-dev-14810-deployment",
-          "s3Key": "amplify-builds/getQuickSightDashboardEmbedURL-394937623155534b2f36-build.zip"
-        }
-      }
     }
-  },
-  "hosted": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-university-hosted-130600-authRole",
-      "UnauthRoleArn": "arn:aws:iam::228287724687:role/amplify-university-hosted-130600-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::228287724687:role/amplify-university-hosted-130600-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-university-hosted-130600-deployment",
-      "UnauthRoleName": "amplify-university-hosted-130600-unauthRole",
-      "StackName": "amplify-university-hosted-130600",
-      "StackId": "arn:aws:cloudformation:us-east-1:228287724687:stack/amplify-university-hosted-130600/b08064c0-dc9e-11eb-b6b8-0e2e9aec3a21",
-      "AmplifyAppId": "d1nl7047j8w93j"
-    },
-    "categories": {
-      "api": {
-        "university": {
-          "rdsRegion": "us-east-1",
-          "rdsClusterIdentifier": "arn:aws:rds:us-east-1:228287724687:cluster:ums",
-          "rdsSecretStoreArn": "arn:aws:secretsmanager:us-east-1:228287724687:secret:rds-db-credentials/cluster-QCY5GO6WOMYBPUDFNLE4D4TAG4/admin-9aXoVF",
-          "rdsDatabaseName": "umsdb"
-        }
-      },
-      "auth": {
-        "university039b3f67": {}
-      },
-      "function": {
-        "getQuickSightDashboardEmbedURL": {}
-      }
-    }
-  }
 }
