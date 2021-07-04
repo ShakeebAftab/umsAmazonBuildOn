@@ -24,7 +24,7 @@ const MainApp = () => {
         fetchUserType();
     }, [setAuthState])
 
-    if (userName === '') return (
+    if (userName === 'admin') return (
         <Box overflow='hidden'>
             <Grid container direction='column' spacing={4}>
                 <Grid item sm={12}>
